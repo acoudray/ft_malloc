@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   tools_glob.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/12 17:23:15 by gmachena         ###   ########.fr       */
+/*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
+/*   Updated: 2019/11/12 17:17:56 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_malloc.h"
 
-void    free(void *ptr)
+t_block *glob_m = {0, 0, 0, 0};
+
+void    *ft_get_block(void)
 {
-    //if (!(ft_get_block()))
-    //	return;
-	ft_malloc(1);
-    (void)ptr;
+    void;
+    return (NULL);
 }

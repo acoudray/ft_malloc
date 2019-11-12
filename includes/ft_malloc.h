@@ -65,10 +65,19 @@
 
 typedef struct      s_block
 {
+    char            a;
     size_t          size;
     int             free;
     struct s_block  *next;
 }                   t_block;
+
+extern t_block	*glob_m;
+
+/*
+**  GET_BLOCK FONCTION GENERAL QUI PERMET DE RECUPERER LE PREMIER MAILLON QUI EST UNE VARIABLE GLOBAL
+*/
+
+void    *ft_get_block();
 
 /*
 **	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
@@ -90,10 +99,14 @@ void	*ft_block_split(t_block *ptr, size_t size);
 **	FREE FONCTION LIBERANT L'ESPACE ALLOUE PAR MALLOC:
 **	- APPELLE LA FONCTION SET_FREE MODIFIANT LA META DATA APPARTENANT AU POINTEUR ET SETANT LA MEM
 **	- APPELLE MERGE QUI CHECK SI IL N'Y A PAS DE MEMOIRE FRAGMENTE APRES SET_FREE. RENVOIE UN POINTEUR SUR LE MAILLON MERGE
-**	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR
+**	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
 */
 
 void    free(void *ptr);
+void    ft_set_free(t_block *ptr);
+void    merge(t_block *ptr, t_block *tmp);
+void    dealloc_mem(t_block *ptr, t_block *tmp);
+
 
 void    *realloc(void *ptr, size_t size);
 void    show_alloc_mem();
