@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.c                                           :+:      :+:    :+:   */
+/*   ft_ptrswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 11:15:28 by acoudray          #+#    #+#             */
-/*   Updated: 2019/11/06 14:33:12 by acoudray         ###   ########.fr       */
+/*   Created: 2017/05/11 01:05:08 by gmachena          #+#    #+#             */
+/*   Updated: 2017/05/11 02:51:13 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_malloc.h"
+#include "libft.h"
 
-void	*malloc(size_t size)
+void	ft_ptrswap(void **data_1, void **data_2)
 {
-	if ((int)size <= 0)
-		return (NULL);
-	else if ((int)size <= TINY)
-		;
-	else if ((int)size <= SMALL)
-		;
-	else
-		;
+	void	*tmp;
+
+	tmp = *data_1;
+	data_1 = data_2;
+	*data_2 = tmp;
 }
