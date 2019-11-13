@@ -14,12 +14,7 @@
 
 void	*ft_malloc(size_t size)
 {
-	if ((int)size <= 0)
+	if (size == 0)
 		return (NULL);
-	else if ((int)size <= TINY)
-		;
-	else if ((int)size <= SMALL)
-		;
-	else
-		;
+	return(NULL);
 }

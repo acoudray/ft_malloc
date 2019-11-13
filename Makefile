@@ -3,7 +3,7 @@ ifeq ($(HOSTTYPE),)
 endif
 
 GCC= gcc
-CFLAGS= -Wall -Wextra -Werror -FPIC
+CFLAGS= -Wall -Wextra -Werror -fPIC
 
 NAME= ft_malloc_$(HOSTTYPE).so
 LINK= ft_malloc.so
@@ -28,12 +28,12 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_PATHS)
 	$(CC) $(OBJ_PATHS) $(HEADERS) $(LIBRARIES) -shared -o $(NAME)
-	@rm -f $(LINK)
+	@/bin/rm rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
 $(OBJ_PATHS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) -c $(FLAGS) $(HEADERS) $< -o $@
+	@/bin/mkdir -p $(OBJ_DIR)
+	$(CC) -c $(CFLAGS) $(HEADERS) $< -o $@
 
 $(LIBFT):
 	(cd $(LIBFT_DIR) && make)
