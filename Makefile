@@ -19,11 +19,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ_PATHS)
 	$(CC) $(OBJ_PATHS) $(HEADERS) -shared -o $(NAME)
-	@/bin/rm rm -f $(LINK)
+	@rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
 $(OBJ_PATHS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@/bin/mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) -c $(CFLAGS) $(HEADERS) $< -o $@
 
 $(LIBFT):
