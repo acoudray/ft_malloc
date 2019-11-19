@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/12 09:26:15 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:46:03 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void    *ft_new_block(size_t size);
 void    *ft_create_block(size_t size, t_block **block);
 void	*ft_block_initialize(t_block **block, int maptype, char c);
 void	*ft_search_block(size_t size);
-void	*ft_block_split(t_block *ptr, size_t size);
+void	ft_block_split(void *ptr, size_t size);
 
 /*
 **	FREE FONCTION LIBERANT L'ESPACE ALLOUE PAR MALLOC:

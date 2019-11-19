@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:15:28 by acoudray          #+#    #+#             */
-/*   Updated: 2019/11/06 14:33:12 by acoudray         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:32:35 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_malloc(size_t size)
 	else if ((addr = ft_search_block(size)) == NULL)
 		if ((addr = ft_new_block(size)) == MAP_FAILED)
 			return (NULL);
-	
+	ft_block_split(addr, size);
 	addr += sizeof(t_block);
 	return(addr);
 }
