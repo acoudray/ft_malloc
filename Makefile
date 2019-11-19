@@ -7,44 +7,33 @@ CFLAGS= -Wall -Wextra -Werror -fPIC
 
 NAME= ft_malloc_$(HOSTTYPE).so
 LINK= ft_malloc.so
-LIBFT= $(LIBFT_DIR)libft.a
-HEADERS = -I ./include -I $(LIBFT_DIR)
+HEADERS = -I ./includes/
 
 SRC_DIR= ./srcs/
 
-SRC_DIR_FREE = free/
-SRC_DIR_MALLOC = malloc/
-SRC_DIR_REALLOC = realloc/
-
-
-FILENAMES =		free malloc realloc show_alloc_mem
-LIBRARIES =		-L$(LIBFT_DIR) -lft
+FILENAMES =		free malloc realloc show_alloc_mem tools_glob
 OBJ_DIR= ./obj/
-LIBFT_DIR =		./libft/
-LIBS = libft
 OBJ_PATHS :=	$(addprefix $(OBJ_DIR),$(addsuffix .o,$(FILENAMES)))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_PATHS)
-	$(CC) $(OBJ_PATHS) $(HEADERS) $(LIBRARIES) -shared -o $(NAME)
-	@/bin/rm rm -f $(LINK)
+$(NAME): $(OBJ_PATHS)
+	$(CC) $(OBJ_PATHS) $(HEADERS) -shared -o $(NAME)
+	@rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
 $(OBJ_PATHS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@/bin/mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) -c $(CFLAGS) $(HEADERS) $< -o $@
 
 $(LIBFT):
-	(cd $(LIBFT_DIR) && make)
+	(cd && make)
 
 clean:
 	-rm -rf obj  2> /dev/null || true
-	make -C $(LIBS) clean 2> /dev/null || true
 
 fclean: clean
 	-rm -rf $(NAME) $(LINK)
-	make -C $(LIBS) fclean 2> /dev/null || true
 
 re: fclean all
 

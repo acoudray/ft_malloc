@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/12 09:26:15 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:46:03 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <sys/resource.h>
-# include "../libft/includes/libft.h"
-
+# include <stdio.h>
 /*
 **	!! LES REGIONS D'ALLOCATIONS DOIVENT ETRE DES MULTIPLES DE SIZEPAGES !!
 **	!! SIZEPAGES = 4096 bytes !!
@@ -54,7 +53,7 @@
 */
 
 # define SMALL_SZ 8003584
-# define SMALL_PC 15000
+# define SMALL_PC 127000
 
 /*
 **	STRUCT CONTENANT LES META DATA DES ALLOCATIONS:
@@ -74,12 +73,6 @@ typedef struct      s_block
 extern t_block	*glob_m;
 
 /*
-**  GET_BLOCK FONCTION GENERAL QUI PERMET DE RECUPERER LE PREMIER MAILLON QUI EST UNE VARIABLE GLOBAL
-*/
-
-void    *ft_get_block();
-
-/*
 **	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
 **	- APPELLE MEME_INITIALIZE INITIALISE T_BLOCK SI INEXISTANT EST LINK LE POINTER GLOB
 **	- APPELLE SEARCH_BLOCK QUI TROUVE LE BLOCK ADEQUAT ET RENVOIE UN POINTEUR DESSUS
@@ -90,10 +83,11 @@ void    *ft_get_block();
 */
 
 void    *ft_malloc(size_t size);
-void	ft_meme_initialize();
-void	*ft_search_block(t_block *ptr, size_t size);
-void	ft_alloc_mem(t_block *ptr);
-void	*ft_block_split(t_block *ptr, size_t size);
+void    *ft_new_block(size_t size);
+void    *ft_create_block(size_t size, t_block **block);
+void	*ft_block_initialize(t_block **block, int maptype, char c);
+void	*ft_search_block(size_t size);
+void	ft_block_split(void *ptr, size_t size);
 
 /*
 **	FREE FONCTION LIBERANT L'ESPACE ALLOUE PAR MALLOC:
@@ -102,12 +96,14 @@ void	*ft_block_split(t_block *ptr, size_t size);
 **	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
 */
 
-void    free(void *ptr);
+void    ft_free(void *ptr);
 void    ft_set_free(t_block *ptr);
 void    merge(t_block *ptr, t_block *tmp);
 void    dealloc_mem(t_block *ptr, t_block *tmp);
 
 
+
 void    *realloc(void *ptr, size_t size);
 void    show_alloc_mem();
+
 #endif
