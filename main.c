@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/15 11:57:15 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/20 10:45:29 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int main(void)
     ft_malloc(126000);
     ft_malloc(128000);
     ft_debug();
+    show_alloc_mem();
     return (0);
 }
