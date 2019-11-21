@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 11:55:24 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:15:47 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void    ft_set_free(t_block *ptr);
 void    merge(t_block *ptr, t_block *tmp);
 void    dealloc_mem(t_block *ptr, t_block *tmp);
 
-t_block	*ft_search_addr(void *ptr);
+void    *ft_search_addr(void *ptr);
 
 
 void    *realloc(void *ptr, size_t size);

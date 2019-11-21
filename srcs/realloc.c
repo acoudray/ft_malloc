@@ -6,27 +6,40 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/21 12:16:31 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:02:40 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <string.h>
 #include "ft_malloc.h"
 
 void	*ft_resize_block(void *addr, size_t size)
 {
 	t_block *tmp;
 
-	tmp  = addr;
-	if (size < tmp->size - sizeof(t_block))
-		ft_block_split(addr, size);
+	tmp  = addr - sizeof(t_block);
+	tmp->i = 1;
+    printf("size of: size = %lu\na = %lu\nfree = %lu\n struct %lu\n", sizeof(tmp->size), sizeof(tmp->a), sizeof(tmp->free), sizeof(t_block));
+	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
+	{
+		tmp->size = size;
+		ft_block_split(tmp, size);
+	}
 	else
 	{
 		if ((tmp->next == NULL) || (tmp->next->a < 'a'))
+		{
+			tmp->free = 1;
 			return (NULL);
-		if (tmp->next->free == 1 && ((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
+		}
+		if (tmp->next->free == 1 &&
+		((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
 			ft_block_split(addr, size);
 		else
+		{
+			tmp->free = 1;
 			return (NULL);
+		}
 	}
 	return (addr);
 }
@@ -59,9 +72,12 @@ void	*realloc(void *ptr, size_t size)
     if ((addr = ft_search_addr(ptr)) == NULL)
     	return (addr);
 	if (ft_resize_block(addr, size) == NULL)
+	{
 		if ((addr = ft_search_block(size)) == NULL)
-			if ((addr = ft_new_block(size)) == MAP_FAILED) // il faut copie la mem
+			if ((addr = ft_new_block(size)) == MAP_FAILED)
 				return (NULL);
-	ft_block_split(addr, size);
+		memcpy(addr + sizeof(t_block), ptr, size);		//attention fonction interdite
+		ft_block_split(addr, size);
+	}
     return ((void*)addr + sizeof(t_block));
 }
