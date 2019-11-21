@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 15:52:44 by acoudray         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:54:59 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,36 @@
 	
 // }
 
+static void		remove_empty_blocks()
+{
+	t_block *curr;
+
+	curr = glob_m;
+	while (curr)
+	{
+		if (curr->a < 'a' && curr->free)
+		{
+			if (curr == glob_m && glob_m->next)
+			{
+				glob_m = glob_m->next;
+				glob_m->a -= 32;
+			}
+			munmap(curr + sizeof(t_block), curr->size);
+		}
+		curr = curr->next;
+	}
+}
+
 static void		merge(void)
 {
-	t_block *prev;
-	t_block *current;
+	t_block *curr;
 
-	current = glob_m;
-	while (current)
+	curr = glob_m;
+	while (curr)
 	{
-		if (prev->a < 'a' && current->next == NULL)
-			munmap(&current, current->size);
-		else if (current->free && current->next && current->next->free)
-		{
-			if (current->a < 'a' && current->next->a > 'a')
-				current->size += current->next->size + sizeof(t_block);
-		}
-		prev = current;
-		current = current->next;
+		if (curr->free && curr->next && curr->next->free)
+			curr->size += curr->next->size + sizeof(t_block);
+		curr = curr->next;
 	}
 }
 
@@ -51,4 +64,5 @@ void			ft_free(void *ptr)
 		return ;
 	metadata->free = 1;
 	merge();
+	remove_empty_blocks();
 }
