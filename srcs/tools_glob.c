@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 10:47:14 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:59:27 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*ft_create_block(size_t size, t_block **block)
 	maptype = (sz == 'T') ? TINY_SZ : 
 			((sz == 'S') ? SMALL_SZ : size + sizeof(t_block));
 	if (((*block) = mmap(NULL, maptype, PROT_READ|PROT_WRITE,
-     MAP_PRIVATE|MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
+     MAP_PRIVATE| MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
 		return (MAP_FAILED);
 	new = ft_mem_initialize(block, maptype - sizeof(t_block), sz);
 
@@ -84,9 +84,9 @@ void	ft_block_split(void *ptr, size_t size)
 	block->free = 0;
 	if ((size + sizeof(t_block)) < block->size)
 	{
-		tmp = ptr + size;
+		tmp = ptr + size + sizeof(t_block);
 		new = tmp;
-		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)), (block->a < 'z') ? block->a + 32: block->a);
+		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)), (block->a < 'a') ? block->a + 32: block->a);
 		new->next = block->next;
 		block->size = size;
 		block->next = new;
