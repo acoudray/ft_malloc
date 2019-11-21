@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 18:05:05 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/21 12:10:48 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	*ft_resize_block(void *addr, size_t size)
 	{
 		if ((tmp->next == NULL) || (tmp->next->a < 'a'))
 			return (NULL);
-		if (tmp->next->free == 1 && 
-		((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
+		if (tmp->next->free == 1 && ((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
 		{
 			
 		}
@@ -34,18 +33,12 @@ void	*ft_resize_block(void *addr, size_t size)
 
 void	*ft_search_addr(void *ptr)
 {
-    t_block *tmp;
-	void	*c;
-	void	*d;
+	t_block *tmp;
 
 	tmp = glob_m;
-	c = tmp + sizeof(t_block);
-	printf("c = %p\n", c);
-	printf("ptr = %p\n", ptr);
-	d = tmp;
 	while (tmp)
 	{
-		if (ptr >= c && ptr <= d)
+		if (ptr == (void*)tmp + sizeof(t_block))
 			return (ptr);
 		tmp = tmp->next;
 	}
