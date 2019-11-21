@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/21 12:10:48 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/21 12:16:31 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	*ft_resize_block(void *addr, size_t size)
 		if ((tmp->next == NULL) || (tmp->next->a < 'a'))
 			return (NULL);
 		if (tmp->next->free == 1 && ((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
-		{
-			
-		}
+			ft_block_split(addr, size);
+		else
+			return (NULL);
 	}
 	return (addr);
 }
