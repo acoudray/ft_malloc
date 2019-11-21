@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 12:04:03 by acoudray         ###   ########.fr       */
+/*   Updated: 2019/11/20 12:56:24 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_block_split(void *ptr, size_t size);
 
 void	ft_free(void *ptr);
 void	ft_set_free(t_block *ptr);
-void	merge(t_block *ptr, t_block *tmp);
+// void	merge(t_block *ptr, t_block *tmp);
 void	dealloc_mem(t_block *ptr, t_block *tmp);
 
 t_block	*ft_search_addr(void *ptr);

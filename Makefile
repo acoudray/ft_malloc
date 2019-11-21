@@ -3,7 +3,7 @@ ifeq ($(HOSTTYPE),)
 endif
 
 GCC= gcc
-CFLAGS= -Wall -Wextra -Werror -fPIC
+CFLAGS= -Wall -Wextra -Werror -fPIC -g
 
 NAME= ft_malloc_$(HOSTTYPE).so
 LINK= ft_malloc.so

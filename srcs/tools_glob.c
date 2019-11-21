@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_glob.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 10:47:14 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/20 14:42:32 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	ft_block_split(void *ptr, size_t size)
 	block->free = 0;
 	if ((size + sizeof(t_block)) < block->size)
 	{
-		tmp = ptr + size;
+		tmp = ptr + size + sizeof(t_block);
 		new = tmp;
-		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)), (block->a < 'z') ? block->a + 32: block->a);
+		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)), (block->a < 'a') ? block->a + 32: block->a);
 		new->next = block->next;
 		block->size = size;
 		block->next = new;

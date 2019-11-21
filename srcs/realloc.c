@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 11:49:03 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/20 12:07:57 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	*realloc(void *ptr, size_t size)
     if (ptr == NULL)
         return (ft_malloc(size));
     if (size == 0)
-        return (free(size));
+	{
+        ft_free(ptr);
+		return (NULL);
+	}
     if ((tmp = ft_search_addr(ptr)) == NULL)
     	return ((void*)tmp);
     return (NULL);
