@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 12:48:51 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/07 15:23:23 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ void	*ft_create_block(size_t size, t_block **block)
 	char	sz;
 	int		maptype;
 	t_block	*new;
+	int		largesize;
 
+	largesize = (size + sizeof(t_block)) % 4096;
 	sz = (size <= TINY_PC) ? 'T' : ((size > SMALL_PC) ? 'L' : 'S');
 	maptype = (sz == 'T') ? TINY_SZ : 
-			((sz == 'S') ? SMALL_SZ : size + sizeof(t_block));
+			((sz == 'S') ? SMALL_SZ : size + sizeof(t_block) + largesize);
 	if (((*block) = mmap(NULL, maptype, PROT_READ|PROT_WRITE,
      MAP_PRIVATE| MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
 		return (MAP_FAILED);
