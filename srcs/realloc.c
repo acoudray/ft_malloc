@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/21 16:02:40 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/07 11:12:40 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_resize_block(void *addr, size_t size)
 	t_block *tmp;
 
 	tmp  = addr - sizeof(t_block);
-	tmp->i = 1;
+	tmp->free = 1;
     printf("size of: size = %lu\na = %lu\nfree = %lu\n struct %lu\n", sizeof(tmp->size), sizeof(tmp->a), sizeof(tmp->free), sizeof(t_block));
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
 	{
