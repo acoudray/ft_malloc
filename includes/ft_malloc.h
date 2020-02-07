@@ -101,7 +101,7 @@ void	ft_set_free(t_block *ptr);
 // void	merge(t_block *ptr, t_block *tmp);
 void	dealloc_mem(t_block *ptr, t_block *tmp);
 
-t_block	*ft_search_addr(void *ptr);
+void    *ft_search_addr(void *ptr);
 
 
 void	*realloc(void *ptr, size_t size);

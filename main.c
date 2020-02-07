@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/21 16:54:08 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/07 10:44:44 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ void    ft_debug(void)
 
 int main(void)
 {
-    char *p, *q, *r;
+    char *t;
+    char *c;
+    char *i;
 
-    p = ft_malloc(400);
-    q = ft_malloc(5);
-    r = ft_malloc(50);
-    ft_free(p);
-    // ft_free(q);
-    // ft_free(r);    
+    t = (char*)ft_malloc(sizeof(char) * 100);
+    c = (char*)ft_malloc(sizeof(char) * 5);
+    i = (char*)ft_malloc(sizeof(char) * 5);
+    printf("\n\n sizeof %lu \n\n", 100 - sizeof(t_block) - 5);
+    realloc(t, 100 - sizeof(t_block) - 5);
     ft_debug();
     show_alloc_mem();
     return (0);
