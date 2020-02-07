@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 10:44:44 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/07 14:10:13 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ int main(void)
     char *c;
     char *i;
 
-    t = (char*)ft_malloc(sizeof(char) * 100);
+    t = (char*)ft_malloc(sizeof(char) * 5);
     c = (char*)ft_malloc(sizeof(char) * 5);
     i = (char*)ft_malloc(sizeof(char) * 5);
     printf("\n\n sizeof %lu \n\n", 100 - sizeof(t_block) - 5);
-    realloc(t, 100 - sizeof(t_block) - 5);
+    realloc(t, 500);
+    realloc(t, 800);
     ft_debug();
     show_alloc_mem();
     return (0);

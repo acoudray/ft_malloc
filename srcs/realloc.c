@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 11:12:40 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/07 14:10:34 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,21 @@ void	*ft_resize_block(void *addr, size_t size)
 
 	tmp  = addr - sizeof(t_block);
 	tmp->free = 1;
-    printf("size of: size = %lu\na = %lu\nfree = %lu\n struct %lu\n", sizeof(tmp->size), sizeof(tmp->a), sizeof(tmp->free), sizeof(t_block));
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
-	{
-		tmp->size = size;
 		ft_block_split(tmp, size);
-	}
 	else
 	{
 		if ((tmp->next == NULL) || (tmp->next->a < 'a'))
-		{
-			tmp->free = 1;
 			return (NULL);
-		}
 		if (tmp->next->free == 1 &&
 		((tmp->next->size + tmp->size + sizeof(t_block)) >= size))
-			ft_block_split(addr, size);
-		else
 		{
-			tmp->free = 1;
-			return (NULL);
+			tmp->size = (tmp->next->size + tmp->size + sizeof(t_block));
+			tmp->next = tmp->next->next;
+			ft_block_split(tmp, size);
 		}
+		else
+			return (NULL);
 	}
 	return (addr);
 }
