@@ -6,15 +6,11 @@
     "configurations": [
         {
             "name": "gcc build and debug active file",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
+            "program": "a.out",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
             "preLaunchTask": "gcc build active file"
         }
     ]

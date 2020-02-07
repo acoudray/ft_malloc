@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 10:44:44 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:29:52 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ int main(void)
     char *c;
     char *i;
 
-    t = (char*)ft_malloc(sizeof(char) * 100);
+    t = (char*)ft_malloc(sizeof(char) * 1073741824);
     c = (char*)ft_malloc(sizeof(char) * 5);
-    i = (char*)ft_malloc(sizeof(char) * 5);
-    printf("\n\n sizeof %lu \n\n", 100 - sizeof(t_block) - 5);
-    realloc(t, 100 - sizeof(t_block) - 5);
+    i = (char*)ft_malloc(sizeof(char) * 499);
+    //printf("\n\n sizeof %lu \n\n", 100 - sizeof(t_block) - 5);
+    //ft_debug();
+    //ft_free(t);
+    //ft_free(c);
+    ft_free(i);
     ft_debug();
+    while (1) ;
     show_alloc_mem();
     return (0);
 }

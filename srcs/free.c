@@ -6,36 +6,11 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/21 16:54:59 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:13:53 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-// void    ft_set_free(t_block *ptr)
-// {
-	
-// }
-
-static void		remove_empty_blocks()
-{
-	t_block *curr;
-
-	curr = glob_m;
-	while (curr)
-	{
-		if (curr->a < 'a' && curr->free)
-		{
-			if (curr == glob_m && glob_m->next)
-			{
-				glob_m = glob_m->next;
-				glob_m->a -= 32;
-			}
-			munmap(curr + sizeof(t_block), curr->size);
-		}
-		curr = curr->next;
-	}
-}
 
 static void		merge(void)
 {
@@ -44,11 +19,46 @@ static void		merge(void)
 	curr = glob_m;
 	while (curr)
 	{
-		if (curr->free && curr->next && curr->next->free)
+		if (curr->free && curr->next && curr->next->free && curr->next->a > 'a')
+		{
 			curr->size += curr->next->size + sizeof(t_block);
-		curr = curr->next;
+			curr->next = curr->next->next;
+		}
+		else
+			curr = curr->next;
 	}
 }
+
+static void		remove_empty_blocks()
+{
+	t_block *curr;
+	t_block *prev;
+
+	curr = glob_m;
+	prev = NULL;
+	while (curr)
+	{
+		if (curr->free == 1 && curr->a < 'a' && (curr->size + sizeof(t_block) == TINY_SZ
+			|| curr->size + sizeof(t_block) >= SMALL_SZ))
+		{
+			if (prev != NULL)
+				prev->next = curr->next;
+			else
+			{
+				prev = curr->next;
+				glob_m = prev;
+			}
+			munmap(curr, curr->size + sizeof(t_block));
+			curr = prev;
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+	}
+}
+
 
 void			ft_free(void *ptr)
 {
@@ -60,8 +70,6 @@ void			ft_free(void *ptr)
 		return ;
 	start = glob_m;
 	metadata = ptr - sizeof(t_block);
-	if (metadata == NULL || metadata->free == 1)
-		return ;
 	metadata->free = 1;
 	merge();
 	remove_empty_blocks();
