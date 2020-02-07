@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 11:55:24 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/20 12:56:24 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@
 **	- NEXT POINTE SUR LE MAILLON SUIVANT DANS L'ORDRE DE LA MEMOIRE
 */
 
-typedef struct      s_block
+typedef struct		s_block
 {
-    char            a;
-    size_t          size;
-    int             free;
-    struct s_block  *next;
-}                   t_block;
+	char			a;
+	size_t			size;
+	int				free;
+	struct s_block	*next;
+}					t_block;
 
 extern t_block	*glob_m;
 
@@ -82,9 +82,9 @@ extern t_block	*glob_m;
 **	- RETOURNE L'ADRESSE DU MAILLON + SIZEOF(T_BLOCK)
 */
 
-void    *ft_malloc(size_t size);
-void    *ft_new_block(size_t size);
-void    *ft_create_block(size_t size, t_block **block);
+void	*ft_malloc(size_t size);
+void	*ft_new_block(size_t size);
+void	*ft_create_block(size_t size, t_block **block);
 void	*ft_block_initialize(t_block **block, int maptype, char c);
 void	*ft_search_block(size_t size);
 void	ft_block_split(void *ptr, size_t size);
@@ -96,15 +96,15 @@ void	ft_block_split(void *ptr, size_t size);
 **	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
 */
 
-void    ft_free(void *ptr);
-void    ft_set_free(t_block *ptr);
-void    merge(t_block *ptr, t_block *tmp);
-void    dealloc_mem(t_block *ptr, t_block *tmp);
+void	ft_free(void *ptr);
+void	ft_set_free(t_block *ptr);
+// void	merge(t_block *ptr, t_block *tmp);
+void	dealloc_mem(t_block *ptr, t_block *tmp);
 
 t_block	*ft_search_addr(void *ptr);
 
 
-void    *realloc(void *ptr, size_t size);
-void    show_alloc_mem();
+void	*realloc(void *ptr, size_t size);
+void	show_alloc_mem();
 
 #endif

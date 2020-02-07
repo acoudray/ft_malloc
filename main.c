@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 10:45:29 by gmachena         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:54:08 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ void    ft_debug(void)
 
 int main(void)
 {
-    ft_malloc(496);
-    ft_malloc(126000);
-    ft_malloc(128000);
+    char *p, *q, *r;
+
+    p = ft_malloc(400);
+    q = ft_malloc(5);
+    r = ft_malloc(50);
+    ft_free(p);
+    // ft_free(q);
+    // ft_free(r);    
     ft_debug();
     show_alloc_mem();
     return (0);
