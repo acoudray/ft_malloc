@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tools_glob.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 15:23:23 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:11:53 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_malloc.h"
 
 t_block *glob_m = NULL;
+pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 
 void	*ft_search_block(size_t size)
 {
