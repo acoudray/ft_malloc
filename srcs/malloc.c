@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:15:28 by acoudray          #+#    #+#             */
-/*   Updated: 2019/11/20 12:16:25 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:15:56 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*ft_malloc(size_t size)
 {
 	void *addr;
 
+	pthread_mutex_lock(&mut);
 	addr = NULL;
 	if (size == 0)
 		return (NULL);
@@ -29,4 +30,5 @@ void	*ft_malloc(size_t size)
 			return (NULL);
 	ft_block_split(addr, size);
 	return(addr + sizeof(t_block));
+	pthread_mutex_unlock(&mut);
 }

@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 16:13:53 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:15:51 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void			ft_free(void *ptr)
 	t_block		*start;
 	t_block		*ptrblock;
 
+	pthread_mutex_lock(&mut);
 	if ((ptrblock = ft_search_addr(ptr)) == NULL)
 		return ;
 	start = glob_m;
@@ -73,4 +74,5 @@ void			ft_free(void *ptr)
 	metadata->free = 1;
 	merge();
 	remove_empty_blocks();
+	pthread_mutex_unlock(&mut);
 }
