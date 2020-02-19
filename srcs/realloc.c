@@ -6,18 +6,18 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 14:10:34 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:41:03 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <string.h>
+#include <string.h>
 #include "ft_malloc.h"
 
 void	*ft_resize_block(void *addr, size_t size)
 {
 	t_block *tmp;
 
-	tmp  = addr - sizeof(t_block);
+	tmp = addr - sizeof(t_block);
 	tmp->free = 1;
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
 		ft_block_split(tmp, size);
@@ -54,24 +54,24 @@ void	*ft_search_addr(void *ptr)
 
 void	*realloc(void *ptr, size_t size)
 {
-    void *addr;
+	void *addr;
 
-    if (ptr == NULL)
-        return (ft_malloc(size));
-    if (size == 0)
+	if (ptr == NULL)
+		return (ft_malloc(size));
+	if (size == 0)
 	{
 		ft_free(ptr);
 		return (NULL);
 	}
-    if ((addr = ft_search_addr(ptr)) == NULL)
-    	return (addr);
+	if ((addr = ft_search_addr(ptr)) == NULL)
+		return (addr);
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
 				return (NULL);
-		memcpy(addr + sizeof(t_block), ptr, size);		//attention fonction interdite
+		ft_memcpy(addr + sizeof(t_block), ptr, size);
 		ft_block_split(addr, size);
 	}
-    return ((void*)addr + sizeof(t_block));
+	return ((void*)addr + sizeof(t_block));
 }
