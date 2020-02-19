@@ -30,7 +30,7 @@ $(LIBFT):
 	(cd && make)
 
 clean:
-	-rm -rf obj  2> /dev/null || true
+	-rm -rf obj 2> /dev/null || true
 
 fclean: clean
 	-rm -rf $(NAME) $(LINK)
