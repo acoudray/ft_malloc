@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 13:11:53 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:31:00 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	*ft_search_block(size_t size)
 
 void	*ft_mem_initialize(t_block **block, int size, char sz)
 {
-    (*block)->a = sz;
-    (*block)->size = size;
-    (*block)->free = 1;
-    (*block)->next = NULL;
+	(*block)->a = sz;
+	(*block)->size = size;
+	(*block)->free = 1;
+	(*block)->next = NULL;
 	return ((*block));
 }
 
@@ -55,7 +55,7 @@ void	*ft_create_block(size_t size, t_block **block)
 	maptype = (sz == 'T') ? TINY_SZ : 
 			((sz == 'S') ? SMALL_SZ : size + sizeof(t_block) + largesize);
 	if (((*block) = mmap(NULL, maptype, PROT_READ|PROT_WRITE,
-     MAP_PRIVATE| MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
+		MAP_PRIVATE| MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
 		return (MAP_FAILED);
 	new = ft_mem_initialize(block, maptype - sizeof(t_block), sz);
 
