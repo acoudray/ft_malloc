@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 12:56:24 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:43:32 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <sys/resource.h>
+# include <pthread.h>
 # include <stdio.h>
+# include "libft.h"
 /*
 **	!! LES REGIONS D'ALLOCATIONS DOIVENT ETRE DES MULTIPLES DE SIZEPAGES !!
 **	!! SIZEPAGES = 4096 bytes !!
@@ -71,7 +73,7 @@ typedef struct		s_block
 }					t_block;
 
 extern t_block	*glob_m;
-
+extern pthread_mutex_t mut;
 /*
 **	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
 **	- APPELLE MEME_INITIALIZE INITIALISE T_BLOCK SI INEXISTANT EST LINK LE POINTER GLOB
