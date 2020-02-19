@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 13:15:51 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:43:26 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,34 @@ static void		merge(void)
 	}
 }
 
-static void		remove_empty_blocks()
+static void		remove_empty_blocks(void)
 {
-	t_block *curr;
-	t_block *prev;
+	t_block *b[2];
 
-	curr = glob_m;
-	prev = NULL;
-	while (curr)
+	b[0] = glob_m;
+	b[1] = NULL;
+	while (b[0])
 	{
-		if (curr->free == 1 && curr->a < 'a' && (curr->size + sizeof(t_block) == TINY_SZ
-			|| curr->size + sizeof(t_block) >= SMALL_SZ))
+		if (b[0]->free == 1 && b[0]->a < 'a' && (b[0]->size + sizeof(t_block)
+			== TINY_SZ || b[0]->size + sizeof(t_block) >= SMALL_SZ))
 		{
-			if (prev != NULL)
-				prev->next = curr->next;
+			if (b[1] != NULL)
+				b[1]->next = b[0]->next;
 			else
 			{
-				prev = curr->next;
-				glob_m = prev;
+				b[1] = b[0]->next;
+				glob_m = b[1];
 			}
-			munmap(curr, curr->size + sizeof(t_block));
-			curr = prev;
+			munmap(b[0], b[0]->size + sizeof(t_block));
+			b[0] = b[1];
 		}
 		else
 		{
-			prev = curr;
-			curr = curr->next;
+			b[1] = b[0];
+			b[0] = b[0]->next;
 		}
 	}
 }
-
 
 void			ft_free(void *ptr)
 {
