@@ -7,7 +7,7 @@ CFLAGS= -Wall -Wextra -Werror -fPIC -g
 
 NAME= ft_malloc_$(HOSTTYPE).so
 LINK= ft_malloc.so
-HEADERS = -I ./includes/
+HEADERS = -I ./includes/ -I ./libft/includes/
 
 SRC_DIR= ./srcs/
 
@@ -18,7 +18,8 @@ OBJ_PATHS :=	$(addprefix $(OBJ_DIR),$(addsuffix .o,$(FILENAMES)))
 all: $(NAME)
 
 $(NAME): $(OBJ_PATHS)
-	$(CC) $(OBJ_PATHS) $(HEADERS) -lpthread includes/libft.a -shared -o $(NAME)
+	make -C libft
+	$(CC) $(OBJ_PATHS) $(HEADERS) -lpthread libft/libft.a -shared -o $(NAME)
 	@rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
@@ -31,9 +32,11 @@ $(LIBFT):
 
 clean:
 	-rm -rf obj 2> /dev/null || true
+	make clean -C libft
 
 fclean: clean
 	-rm -rf $(NAME) $(LINK)
+	make fclean -C libft
 
 re: fclean all
 
