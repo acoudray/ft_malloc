@@ -11,14 +11,14 @@ HEADERS = -I ./includes/
 
 SRC_DIR= ./srcs/
 
-FILENAMES =		free malloc realloc show_alloc_mem tools_glob
+FILENAMES =		free malloc realloc show_alloc_mem tools_glob free_all
 OBJ_DIR= ./obj/
 OBJ_PATHS :=	$(addprefix $(OBJ_DIR),$(addsuffix .o,$(FILENAMES)))
 
 all: $(NAME)
 
 $(NAME): $(OBJ_PATHS)
-	$(CC) $(OBJ_PATHS) $(HEADERS) -shared -o $(NAME)
+	$(CC) $(OBJ_PATHS) $(HEADERS) -lpthread includes/libft.a -shared -o $(NAME)
 	@rm -f $(LINK)
 	ln -s $(NAME) $(LINK)
 
@@ -30,7 +30,7 @@ $(LIBFT):
 	(cd && make)
 
 clean:
-	-rm -rf obj  2> /dev/null || true
+	-rm -rf obj 2> /dev/null || true
 
 fclean: clean
 	-rm -rf $(NAME) $(LINK)
