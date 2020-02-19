@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 16:29:52 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:08:12 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int main(void)
     //ft_debug();
     //ft_free(t);
     //ft_free(c);
-    ft_free(i);
-    ft_debug();
-    while (1) ;
+    //ft_debug();
     show_alloc_mem();
     return (0);
 }
