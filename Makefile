@@ -11,7 +11,7 @@ HEADERS = -I ./includes/ -I ./libft/includes/
 
 SRC_DIR= ./srcs/
 
-FILENAMES =		free malloc realloc show_alloc_mem tools_glob free_all
+FILENAMES =		free malloc realloc show_alloc_mem free_all tools_glob tools
 OBJ_DIR= ./obj/
 OBJ_PATHS :=	$(addprefix $(OBJ_DIR),$(addsuffix .o,$(FILENAMES)))
 

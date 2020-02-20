@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:56:08 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		merge(void)
 {
 	t_block *curr;
 
-	curr = glob_m;
+	curr = g_glob;
 	while (curr)
 	{
 		if (curr->free && curr->next && curr->next->free && curr->next->a > 'a')
@@ -29,36 +29,34 @@ static void		merge(void)
 	}
 }
 
-static void		remove_empty_blocks()
+static void		remove_empty_blocks(void)
 {
-	t_block *curr;
-	t_block *prev;
+	t_block *b[2];
 
-	curr = glob_m;
-	prev = NULL;
-	while (curr)
+	b[0] = g_glob;
+	b[1] = NULL;
+	while (b[0])
 	{
-		if (curr->free == 1 && curr->a < 'a' && (curr->size + sizeof(t_block) == TINY_SZ
-			|| curr->size + sizeof(t_block) >= SMALL_SZ))
+		if (b[0]->free == 1 && b[0]->a < 'a' && (b[0]->size + sizeof(t_block)
+			== TINY_SZ || b[0]->size + sizeof(t_block) >= SMALL_SZ))
 		{
-			if (prev != NULL)
-				prev->next = curr->next;
+			if (b[1] != NULL)
+				b[1]->next = b[0]->next;
 			else
 			{
-				prev = curr->next;
-				glob_m = prev;
+				b[1] = b[0]->next;
+				g_glob = b[1];
 			}
-			munmap(curr, curr->size + sizeof(t_block));
-			curr = prev;
+			munmap(b[0], b[0]->size + sizeof(t_block));
+			b[0] = b[1];
 		}
 		else
 		{
-			prev = curr;
-			curr = curr->next;
+			b[1] = b[0];
+			b[0] = b[0]->next;
 		}
 	}
 }
-
 
 void			free(void *ptr)
 {
@@ -66,11 +64,17 @@ void			free(void *ptr)
 	t_block		*start;
 	t_block		*ptrblock;
 
+	pthread_mutex_lock(&g_mut);
 	if ((ptrblock = ft_search_addr(ptr)) == NULL)
+	{
+		ft_printf("ptrblock = NULL\n");
+		pthread_mutex_unlock(&g_mut);
 		return ;
-	start = glob_m;
+	}
+	start = g_glob;
 	metadata = ptr - sizeof(t_block);
 	metadata->free = 1;
 	merge();
 	remove_empty_blocks();
+	pthread_mutex_unlock(&g_mut);
 }
