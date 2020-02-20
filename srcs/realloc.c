@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 16:26:17 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:54:30 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "ft_malloc.h"
+
+int ft_same_sz(int size, t_block *t)
+{
+	if (t->a == 'T' || t->a == 't')
+	{
+		if (size > TINY_PC)
+			return (0);
+	}
+	else if(t->a == 'S' || t->a == 's')
+	{
+		if (size > SMALL_PC)
+			return (0);
+	}
+	return (1);
+}
 
 void	*ft_resize_block(void *addr, size_t size)
 {
@@ -19,6 +34,8 @@ void	*ft_resize_block(void *addr, size_t size)
 
 	tmp = addr - sizeof(t_block);
 	tmp->free = 1;
+	if (ft_same_sz(size, tmp) == 0)
+		return (0);
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
 		ft_block_split(tmp, size);
 	else
