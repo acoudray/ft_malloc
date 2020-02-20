@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:14:36 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 11:15:44 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				ft_get_iee(unsigned char **res, long double nbr)
 		exp_2 = (nbr == 0.) ? 0 : exp_2 + 1;
 	ft_bin_str(exp_2, ft_atoui_base((const char *)(tmp2 + 15), "01"),
 		&split, 64);
-	ft_free((*res));
+	free((*res));
 	*res = (unsigned char *)ft_get_flstring(&split);
 	ft_strdel(&exp);
 	return (1);
@@ -77,9 +77,9 @@ char			*ft_lftoa(long double nbr)
 
 	if (nbr != nbr)
 		return ((nbr < 0) ? ("-nan") : ("nan"));
-	if (!(longdb_tab = (UC *)ft_malloc(sizeof(UC)* sizeof(LD) + 1)))
+	if (!(longdb_tab = (UC *)malloc(sizeof(UC) * sizeof(LD) + 1)))
 		return (0);
-	if (!(res = (unsigned char *)ft_malloc(sizeof(unsigned char) * 128 + 1)))
+	if (!(res = (unsigned char *)malloc(sizeof(unsigned char) * 128 + 1)))
 		return (0);
 	ft_memset(longdb_tab, '\0', sizeof(long double) + 1);
 	ft_memset(res, '\0', sizeof(unsigned char) * 128 + 1);
@@ -88,12 +88,12 @@ char			*ft_lftoa(long double nbr)
 	neg = (res[0] == '1') ? 1 : 0;
 	if (ft_get_iee(&res, nbr) == -1)
 	{
-		ft_free(longdb_tab);
-		ft_free(res);
+		free(longdb_tab);
+		free(res);
 		return ((neg == 1) ? ("-inf") : ("inf"));
 	}
 	if (neg == 1)
 		ft_strcadd_left((char **)&res, '-', 1);
-	ft_free(longdb_tab);
+	free(longdb_tab);
 	return ((char*)res);
 }

@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 23:33:03 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:56 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_strdel(char **as)
 {
 	if (as == 0)
 		return ;
-	ft_free(*as);
+	free(*as);
 	*as = 0;
 }

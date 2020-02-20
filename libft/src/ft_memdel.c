@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 23:39:30 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:45 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_memdel(void **ap)
 {
 	if (ap == 0)
 		return ;
-	ft_free(*ap);
+	free(*ap);
 	*ap = 0;
 }

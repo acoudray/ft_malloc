@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 17:31:09 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:01 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int		ft_strtol(char *line)
 	cmp = 0;
 	power = 0;
 	rslt = 0;
-	hexa = (unsigned int*)ft_malloc(sizeof(unsigned int) * ft_strlen(line));
+	hexa = (unsigned int*)malloc(sizeof(unsigned int) * ft_strlen(line));
 	while (line[cmp])
 	{
 		if (line[cmp] >= 'A' && line[cmp] <= 'F')
@@ -55,7 +55,7 @@ unsigned int		ft_strtol(char *line)
 		rslt += hexa[cmp] * ft_power(16, power);
 		power++;
 	}
-	ft_free(hexa);
+	free(hexa);
 	return (rslt);
 }
 

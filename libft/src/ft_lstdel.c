@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 00:42:55 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:32 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 	{
 		tmp = del_chain->next;
 		del(del_chain->content, del_chain->content_size);
-		ft_free(del_chain);
+		free(del_chain);
 		del_chain = tmp;
 	}
 	*alst = 0;

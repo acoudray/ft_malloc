@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 00:24:29 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:39 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 
 	del_link = *alst;
 	del(del_link->content, del_link->content_size);
-	ft_free(del_link);
+	free(del_link);
 	*alst = 0;
 }

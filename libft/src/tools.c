@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 13:36:11 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/11 10:12:33 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:21:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		exit_error(char *str)
-{
-	ft_putstr(str);
-	exit(EXIT_FAILURE);
-}
 
 int		ft_get_d_size(char *i, t_fid fid, int size)
 {

@@ -6,13 +6,13 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:15:28 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/19 14:07:39 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:09:12 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-void	*ft_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	void *addr;
 

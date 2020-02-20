@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 10:17:45 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:02:08 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ int		ft_print_flags_f(t_fid fid, char **str)
 	ft_putstr((*str));
 	x += ft_strlen((*str));
 	x += ft_flagsf_after(fid, (*str));
-	ft_free((*str));
+	free((*str));
 	return (x);
 }

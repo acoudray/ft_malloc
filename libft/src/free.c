@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 16:13:53 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		remove_empty_blocks()
 }
 
 
-void			ft_free(void *ptr)
+void			free(void *ptr)
 {
 	t_block		*metadata;
 	t_block		*start;

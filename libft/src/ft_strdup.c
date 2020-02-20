@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 16:59:54 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 16:49:52 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:11:55 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 
 	i = 0;
-	if (!(str = ((char*)ft_malloc(sizeof(char) * (ft_strlen(s) + 1)))))
+	if (!(str = ((char*)malloc(sizeof(char) * (ft_strlen(s) + 1)))))
 		return (0);
 	while (s[i])
 	{

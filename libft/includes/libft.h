@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:32:51 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 11:13:37 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:24:25 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define LD long double
 # include <sys/stat.h>
 # include <sys/types.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <dirent.h>
@@ -101,7 +100,6 @@ int				ft_strequ(char const *s1, char const *s2);
 char			**ft_strsplit(char const *s, char c);
 int				ft_iswp(int c);
 char			*ft_strtrim(char const *s);
-void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
 void			ft_strdel(char **as);
 char			*ft_strjoin(char const *s1, char const *s2);
@@ -187,7 +185,7 @@ int				get_next_line(const int fd, char **line);
 
 
 extern			void	*ft_malloc(size_t size);
-extern			void	ft_free(void *ptr);
+extern			void	free(void *ptr);
 extern			void	*realloc(void *ptr, size_t size);
 
 #endif
