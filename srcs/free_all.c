@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:03:05 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/20 13:16:20 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:14:17 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_free_all(void)
 {
 	while (g_glob)
 	{
-		ft_free(g_glob);
+		free(g_glob);
 		g_glob = g_glob->next;
 	}
 }

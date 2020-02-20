@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:17:49 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:58:04 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <sys/resource.h>
+# include <pthread.h>
 # include <stdio.h>
+# include "libft.h"
+
 /*
 **	!! LES REGIONS D'ALLOCATIONS DOIVENT ETRE DES MULTIPLES DE SIZEPAGES !!
 **	!! SIZEPAGES = 4096 bytes !!
@@ -70,7 +73,8 @@ typedef struct		s_block
 	struct s_block	*next;
 }					t_block;
 
-extern t_block	*glob_m;
+extern t_block*		g_glob;
+extern pthread_mutex_t g_mut;
 
 /*
 **	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
@@ -98,13 +102,14 @@ void	ft_block_split(void *ptr, size_t size);
 
 void	free(void *ptr);
 void	ft_set_free(t_block *ptr);
-// void	merge(t_block *ptr, t_block *tmp);
 void	dealloc_mem(t_block *ptr, t_block *tmp);
 
-void    *ft_search_addr(void *ptr);
+void	*ft_search_addr(void *ptr);
 
 
 void	*realloc(void *ptr, size_t size);
-void	show_alloc_mem();
+
+void	show_alloc_mem(void);
+void	ft_free_all(void);
 
 #endif

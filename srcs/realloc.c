@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:16:29 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:26:17 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	pthread_mutex_lock(&mut);
+	pthread_mutex_lock(&g_mut);
 	if ((addr = ft_search_addr(ptr)) == NULL)
-		return (addr);
+		return (return_and_unlockmutex(addr));
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
-				return (NULL);
+				return (return_and_unlockmutex(NULL));
 		ft_memcpy(addr + sizeof(t_block), ptr, size);
 		ft_block_split(addr, size);
 	}
-	pthread_mutex_unlock(&mut);
+	pthread_mutex_unlock(&g_mut);
 	return ((void*)addr + sizeof(t_block));
 }

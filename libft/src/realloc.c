@@ -6,18 +6,18 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:56:17 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <string.h>
+#include <string.h>
 #include "ft_malloc.h"
 
 void	*ft_resize_block(void *addr, size_t size)
 {
 	t_block *tmp;
 
-	tmp  = addr - sizeof(t_block);
+	tmp = addr - sizeof(t_block);
 	tmp->free = 1;
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
 		ft_block_split(tmp, size);
@@ -42,7 +42,7 @@ void	*ft_search_addr(void *ptr)
 {
 	t_block *tmp;
 
-	tmp = glob_m;
+	tmp = g_glob;
 	while (tmp)
 	{
 		if (ptr == (void*)tmp + sizeof(t_block))
@@ -54,24 +54,26 @@ void	*ft_search_addr(void *ptr)
 
 void	*realloc(void *ptr, size_t size)
 {
-    void *addr;
+	void *addr;
 
-    if (ptr == NULL)
-        return (malloc(size));
-    if (size == 0)
+	if (ptr == NULL)
+		return (malloc(size));
+	if (size == 0)
 	{
 		free(ptr);
 		return (NULL);
 	}
-    if ((addr = ft_search_addr(ptr)) == NULL)
-    	return (addr);
+	pthread_mutex_lock(&g_mut);
+	if ((addr = ft_search_addr(ptr)) == NULL)
+		return (addr);
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
 				return (NULL);
-		memcpy(addr + sizeof(t_block), ptr, size);		//attention fonction interdite
+		ft_memcpy(addr + sizeof(t_block), ptr, size);
 		ft_block_split(addr, size);
 	}
-    return ((void*)addr + sizeof(t_block));
+	pthread_mutex_unlock(&g_mut);
+	return ((void*)addr + sizeof(t_block));
 }

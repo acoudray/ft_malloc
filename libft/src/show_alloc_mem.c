@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_alloc_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 10:32:41 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/20 17:42:26 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:58:38 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    show_alloc_mem()
     int     i;
 
     i = 0;
-    tmp = glob_m;
+    tmp = g_glob;
     while (tmp)
     {
         if (tmp->a < 97)
