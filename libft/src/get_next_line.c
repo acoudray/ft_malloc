@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:14:12 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/11 12:02:04 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	t_gnl		*ft_free_list(t_gnl *ptr, t_gnl *beginlist)
 			buff = buff->next;
 		buff->next = ptr->next;
 	}
-	ft_free(ptr);
+	free(ptr);
 	ptr = beginlist;
 	return (beginlist);
 }
@@ -49,10 +49,10 @@ static	char		*ft_process_line(char **str, int len)
 	else
 		j++;
 	i = ft_strlen(tab);
-	if (!(ret = (char *)ft_malloc(sizeof(char) * (i + 1))))
+	if (!(ret = (char *)malloc(sizeof(char) * (i + 1))))
 		return (0);
 	ret = ft_strcpy(ret, tab);
-	ft_free(*str);
+	free(*str);
 	if (((j == 0) && (tab[i + 1] == '\0')) || (j == 1))
 		*str = NULL;
 	else
@@ -67,7 +67,7 @@ static	char		*ft_read_fd(int fd, char *tab, int *i)
 
 	if ((*i = read(fd, txt, BUFF_SIZE)) < 1)
 		return (0);
-	if (!(tab = (char *)ft_malloc(sizeof(char) * (*i + 1))))
+	if (!(tab = (char *)malloc(sizeof(char) * (*i + 1))))
 		return (0);
 	tab = ft_strncpy(tab, txt, *i);
 	tab[*i] = '\0';
@@ -75,12 +75,12 @@ static	char		*ft_read_fd(int fd, char *tab, int *i)
 	{
 		buff = ft_strjoin(tab, txt);
 		*i = ft_strlen(tab) + *i;
-		ft_free(tab);
-		if (!(tab = (char*)ft_malloc(sizeof(char) * (*i + 1))))
+		free(tab);
+		if (!(tab = (char*)malloc(sizeof(char) * (*i + 1))))
 			return (0);
 		tab = ft_strncpy(tab, buff, *i);
 		tab[*i] = '\0';
-		ft_free(buff);
+		free(buff);
 		if ((*i % BUFF_5IZE(BUFF_SIZE)) != 0)
 			break ;
 	}
@@ -105,13 +105,13 @@ static	t_gnl		*ft_struct(t_gnl **beginlist, int fd, int *i)
 	READCHECK((str), -1);
 	ptr = NULL;
 	*i = ft_strlen(str);
-	if (!(ptr = (t_gnl *)ft_malloc(sizeof(t_gnl))) ||
-	(!((ptr->str = (char*)ft_malloc(sizeof(char) * (*i + 1))))))
+	if (!(ptr = (t_gnl *)malloc(sizeof(t_gnl))) ||
+	(!((ptr->str = (char*)malloc(sizeof(char) * (*i + 1))))))
 		return (0);
 	ft_strcpy(ptr->str, str);
 	ptr->fd = fd;
 	ptr->next = *beginlist;
-	ft_free(str);
+	free(str);
 	*beginlist = ptr;
 	return (ptr);
 }

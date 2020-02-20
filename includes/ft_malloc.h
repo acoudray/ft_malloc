@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 14:04:31 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:18:07 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <pthread.h>
 # include <stdio.h>
 # include "../libft/includes/libft.h"
-# include <pthread.h>
 
 /*
 **	!! LES REGIONS D'ALLOCATIONS DOIVENT ETRE DES MULTIPLES DE SIZEPAGES !!
@@ -87,7 +86,7 @@ extern pthread_mutex_t mut;
 **	- RETOURNE L'ADRESSE DU MAILLON + SIZEOF(T_BLOCK)
 */
 
-void	*ft_malloc(size_t size);
+void	*malloc(size_t size);
 void	*ft_new_block(size_t size);
 void	*ft_create_block(size_t size, t_block **block);
 void	*ft_block_initialize(t_block **block, int maptype, char c);
@@ -101,7 +100,7 @@ void	ft_block_split(void *ptr, size_t size);
 **	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
 */
 
-void	ft_free(void *ptr);
+void	free(void *ptr);
 void	ft_set_free(t_block *ptr);
 void	dealloc_mem(t_block *ptr, t_block *tmp);
 

@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 09:16:51 by gmachena          #+#    #+#             */
-/*   Updated: 2019/11/11 17:11:38 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:22:48 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ int		is_type(char *str, int i)
 		(c == '%'))
 		return (1);
 	else
-		exit_error("");
-	return (0);
+		return (0);
 }

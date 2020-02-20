@@ -6,7 +6,7 @@
 #    By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/08 14:37:39 by gmachena          #+#    #+#              #
-#    Updated: 2020/02/19 11:18:37 by acoudray         ###   ########.fr        #
+#    Updated: 2020/02/20 13:21:47 by acoudray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC_NAME =			 ft_atoi.c \
 					 ft_islower.c \
 					 ft_iswp.c \
 					 ft_isprint.c\
-					 ft_memalloc.c \
 					 ft_itoa.c \
 					 ft_isupper.c \
 					 ft_memccpy.c \

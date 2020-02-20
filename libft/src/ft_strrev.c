@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 00:13:05 by acoudray          #+#    #+#             */
-/*   Updated: 2019/11/01 15:57:16 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:23:12 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrev(char *str)
 	int		i;
 
 	length = ft_strlen(str);
-	if (!(rev = (char *)ft_memalloc(sizeof(char) * (length) + 1)))
+	if (!(rev = (char *)malloc(sizeof(char) * (length) + 1)))
 		return (0);
 	i = 0;
 	while (length > 0)

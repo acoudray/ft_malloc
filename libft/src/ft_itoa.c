@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phamelin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:45:03 by phamelin          #+#    #+#             */
-/*   Updated: 2018/04/24 16:24:41 by phamelin         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:10:41 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char		*ft_itoa(unsigned int n)
 {
@@ -23,7 +22,7 @@ char		*ft_itoa(unsigned int n)
 	l = 2;
 	while (temp /= 10)
 		l++;
-	if ((res = (char *)ft_malloc(sizeof(char) * l)) == NULL)
+	if ((res = (char *)malloc(sizeof(char) * l)) == NULL)
 		return (NULL);
 	res[--l] = '\0';
 	while (l--)

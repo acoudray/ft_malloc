@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 10:51:02 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/11 12:01:15 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ char	*ft_get_flstring(char ***res)
 	ret = ft_strjoin(str, merged);
 	ft_strdel(&str);
 	ft_strdel(&merged);
-	ft_free((*res)[0]);
-	ft_free((*res)[1]);
-	ft_free((*res));
-	ft_free(str);
-	ft_free(merged);
+	free((*res)[0]);
+	free((*res)[1]);
+	free((*res));
+	free(str);
+	free(merged);
 	return (ret);
 }
 

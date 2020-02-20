@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 01:53:34 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/07 16:50:23 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:12:45 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char			**ft_strsplit(char const *s, char c)
 
 	if (!(nb_words = ft_count_words((char *)s, c)))
 		return (0);
-	result = (char **)ft_malloc(sizeof(char *) * (nb_words + 1));
+	result = (char **)malloc(sizeof(char *) * (nb_words + 1));
 	if (!result)
 		return (NULL);
 	wrd_begin = (char *)s;

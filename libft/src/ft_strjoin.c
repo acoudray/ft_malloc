@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 21:24:32 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/07 16:49:58 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:12:00 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	size_s1 = ft_strlen(s1);
 	size_s2 = ft_strlen(s2);
-	if (!(dst = (char*)ft_malloc(sizeof(char) * (size_s1 + size_s2 + 1))))
+	if (!(dst = (char*)malloc(sizeof(char) * (size_s1 + size_s2 + 1))))
 		return (0);
 	while (++i < size_s1)
 		*(dst + i) = *(s1 + i);

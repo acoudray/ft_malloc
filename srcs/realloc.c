@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 13:41:03 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:09:01 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ void	*realloc(void *ptr, size_t size)
 	void *addr;
 
 	if (ptr == NULL)
-		return (ft_malloc(size));
+		return (malloc(size));
 	if (size == 0)
 	{
-		ft_free(ptr);
+		free(ptr);
 		return (NULL);
 	}
+	pthread_mutex_lock(&mut);
 	if ((addr = ft_search_addr(ptr)) == NULL)
 		return (addr);
 	if (ft_resize_block(addr, size) == NULL)
@@ -73,5 +74,6 @@ void	*realloc(void *ptr, size_t size)
 		ft_memcpy(addr + sizeof(t_block), ptr, size);
 		ft_block_split(addr, size);
 	}
+	pthread_mutex_unlock(&mut);
 	return ((void*)addr + sizeof(t_block));
 }
