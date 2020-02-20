@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 13:41:03 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:16:29 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*ft_search_addr(void *ptr)
 {
 	t_block *tmp;
 
-	tmp = glob_m;
+	tmp = g_glob;
 	while (tmp)
 	{
 		if (ptr == (void*)tmp + sizeof(t_block))

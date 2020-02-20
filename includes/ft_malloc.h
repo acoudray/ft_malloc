@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 14:04:31 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:24:43 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct		s_block
 	struct s_block	*next;
 }					t_block;
 
-extern t_block*		glob_m;
-extern pthread_mutex_t mut;
+extern t_block*		g_glob;
+extern pthread_mutex_t g_mut;
 
 /*
 **	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
@@ -110,7 +110,7 @@ void	*ft_search_addr(void *ptr);
 
 void	*realloc(void *ptr, size_t size);
 
-void	show_alloc_mem();
-void	ft_free_all();
+void	show_alloc_mem(void);
+void	ft_free_all(void);
 
 #endif

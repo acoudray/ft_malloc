@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:03:05 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/19 13:05:18 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:16:20 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_malloc.h"
+#include "ft_malloc.h"
 
-void	ft_free_all()
+void	ft_free_all(void)
 {
-	while (glob_m)
+	while (g_glob)
 	{
-		ft_free(glob_m);
-		glob_m = glob_m->next;
+		ft_free(g_glob);
+		g_glob = g_glob->next;
 	}
 }
