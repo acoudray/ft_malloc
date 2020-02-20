@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tools_glob.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/19 13:31:00 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:59:55 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_malloc.h"
 
-t_block *glob_m = NULL;
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
+t_block *g_glob = NULL;
+pthread_mutex_t g_mut = PTHREAD_MUTEX_INITIALIZER;
 
 void	*ft_search_block(size_t size)
 {
@@ -23,7 +23,7 @@ void	*ft_search_block(size_t size)
 	if (size > SMALL_PC)
 		return (NULL);
 	sz = (size <= TINY_PC) ? 't' : 's';
-	ptr = glob_m;
+	ptr = g_glob;
 	while (ptr)
 	{
 		if ((sz == ptr->a || sz == ptr->a + 32) && ptr->free == 1)
@@ -51,14 +51,18 @@ void	*ft_create_block(size_t size, t_block **block)
 	int		largesize;
 
 	largesize = (size + sizeof(t_block)) % 4096;
-	sz = (size <= TINY_PC) ? 'T' : ((size > SMALL_PC) ? 'L' : 'S');
-	maptype = (sz == 'T') ? TINY_SZ : 
-			((sz == 'S') ? SMALL_SZ : size + sizeof(t_block) + largesize);
-	if (((*block) = mmap(NULL, maptype, PROT_READ|PROT_WRITE,
-		MAP_PRIVATE| MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
+	if (size <= TINY_PC)
+		sz = 'T';
+	else
+		sz = ((size > SMALL_PC) ? 'L' : 'S');
+	if (sz == 'T')
+		maptype = TINY_SZ;
+	else
+		maptype = ((sz == 'S') ? SMALL_SZ : size + sizeof(t_block) + largesize);
+	if (((*block) = mmap(NULL, maptype, PROT_READ | PROT_WRITE,
+		MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)) == MAP_FAILED)
 		return (MAP_FAILED);
 	new = ft_mem_initialize(block, maptype - sizeof(t_block), sz);
-
 	return (new);
 }
 
@@ -67,7 +71,7 @@ void	*ft_new_block(size_t size)
 	t_block *new;
 	t_block *tmp;
 
-	tmp = glob_m;
+	tmp = g_glob;
 	if ((ft_create_block(size, &new)) == MAP_FAILED)
 		return (MAP_FAILED);
 	while (tmp->next != NULL)
@@ -89,7 +93,8 @@ void	ft_block_split(void *ptr, size_t size)
 	{
 		tmp = ptr + size + sizeof(t_block);
 		new = tmp;
-		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)), (block->a < 'a') ? block->a + 32: block->a); //danger
+		ft_mem_initialize(&new, block->size - (size + sizeof(t_block)),
+		(block->a < 'a') ? block->a + 32 : block->a);
 		new->next = block->next;
 		block->size = size;
 		block->next = new;
