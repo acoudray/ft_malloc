@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:24:56 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:07:16 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ void			free(void *ptr)
 
 	pthread_mutex_lock(&g_mut);
 	if ((ptrblock = ft_search_addr(ptr)) == NULL)
+	{
+		pthread_mutex_unlock(&g_mut);
 		return ;
+	}
 	start = g_glob;
 	metadata = ptr - sizeof(t_block);
 	metadata->free = 1;

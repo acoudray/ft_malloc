@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:16:29 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:54:30 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "ft_malloc.h"
+
+int ft_same_sz(int size, t_block *t)
+{
+	if (t->a == 'T' || t->a == 't')
+	{
+		if (size > TINY_PC)
+			return (0);
+	}
+	else if(t->a == 'S' || t->a == 's')
+	{
+		if (size > SMALL_PC)
+			return (0);
+	}
+	return (1);
+}
 
 void	*ft_resize_block(void *addr, size_t size)
 {
@@ -19,6 +34,8 @@ void	*ft_resize_block(void *addr, size_t size)
 
 	tmp = addr - sizeof(t_block);
 	tmp->free = 1;
+	if (ft_same_sz(size, tmp) == 0)
+		return (0);
 	if ((int)size < ((int)tmp->size - (int)sizeof(t_block)))
 		ft_block_split(tmp, size);
 	else
@@ -63,17 +80,23 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	pthread_mutex_lock(&mut);
+	pthread_mutex_lock(&g_mut);
 	if ((addr = ft_search_addr(ptr)) == NULL)
+	{
+		pthread_mutex_unlock(&g_mut);
 		return (addr);
+	}
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
+			{
+				pthread_mutex_unlock(&g_mut);
 				return (NULL);
+			}
 		ft_memcpy(addr + sizeof(t_block), ptr, size);
 		ft_block_split(addr, size);
 	}
-	pthread_mutex_unlock(&mut);
+	pthread_mutex_unlock(&g_mut);
 	return ((void*)addr + sizeof(t_block));
 }

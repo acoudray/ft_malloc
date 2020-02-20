@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:03:05 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/20 13:16:20 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:03:01 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_free_all(void)
 {
 	while (g_glob)
 	{
-		ft_free(g_glob);
+		free(g_glob);
 		g_glob = g_glob->next;
 	}
 }
