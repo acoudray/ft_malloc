@@ -16,11 +16,11 @@ void	*malloc(size_t size)
 {
 	void *addr;
 
-	pthread_mutex_lock(&g_mut);
 	addr = NULL;
 	if (size == 0)
-		return (return_and_unlockmutex(NULL));
-	else if (!(g_glob))
+		return (NULL);
+	pthread_mutex_lock(&g_mut);
+	if (!(g_glob))
 	{
 		if ((addr = ft_create_block(size, &g_glob)) == MAP_FAILED)
 			return (return_and_unlockmutex(NULL));

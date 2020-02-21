@@ -136,19 +136,19 @@ void test11()
     for(i = 1; (p = malloc(i)) != NULL; i++){
         ft_printf("%d bytes allocated\n", i);
         free(p);
-        if (i >= 100000)
+        if (i >= 15000)
             break;
     }
 }
 
-void test12()
+void test12(void *imax)
 {
     ft_printf("test12\n");
     void* p;
     size_t i;
     for(i = 1; (p = malloc(i)) != NULL; i += 100000){
         printf("%zu bytes allocated\n", i);
-        if (i >= 1000000000)
+        if (i >= (size_t)imax)
             break;
     }
 }
@@ -160,7 +160,7 @@ void test13()
     int i;
     for(i = 1; (p = malloc(i % 2 == 0 ? 1 : 30)) != NULL; i++){
         ft_printf("%d items allocated\n", i);
-        if (i >= 30000)
+        if (i >= 15000)
             break;
     }
 }
@@ -179,15 +179,15 @@ void test14()
 
 void ft_debug_pthread()
 {
-    char *test1 = 0;
-    char *test2 = 0;
+    // char *test1 = 0;
+    // char *test2 = 0;
     pthread_t thread1;
     pthread_t thread2;
 
-    if(pthread_create(&thread1, NULL, task1, test1) == -1) {
+    if(pthread_create(&thread1, NULL, (void*)test12, (void*)500000000) == -1) {
 	    return ;
     }
-    if(pthread_create(&thread2, NULL, task2, test2) == -1) {
+    if(pthread_create(&thread2, NULL, (void*)test12, (void*)500000000) == -1) {
 	    return ;
     }
     if (pthread_join(thread1, NULL)) {
