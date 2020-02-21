@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 10:45:02 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:29:28 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "./includes/ft_malloc.h"
 # include <pthread.h>
+# include <stdio.h>
 
 void *task1(void *test)
 {
@@ -135,6 +136,8 @@ void test11()
     for(i = 1; (p = malloc(i)) != NULL; i++){
         ft_printf("%d bytes allocated\n", i);
         free(p);
+        if (i >= 100000)
+            break;
     }
 }
 
@@ -142,9 +145,11 @@ void test12()
 {
     ft_printf("test12\n");
     void* p;
-    int i;
-    for(i = 1; (p = malloc(i)) != NULL; i++){
-        ft_printf("%d bytes allocated\n", i);
+    size_t i;
+    for(i = 1; (p = malloc(i)) != NULL; i += 100000){
+        printf("%zu bytes allocated\n", i);
+        if (i >= 1000000000)
+            break;
     }
 }
 
@@ -155,6 +160,8 @@ void test13()
     int i;
     for(i = 1; (p = malloc(i % 2 == 0 ? 1 : 30)) != NULL; i++){
         ft_printf("%d items allocated\n", i);
+        if (i >= 30000)
+            break;
     }
 }
 
@@ -165,6 +172,8 @@ void test14()
     int i;
     for(i = 1; (p = malloc(1)) != NULL; i++){
         ft_printf("%d items allocated\n", i);
+        if (i >= 10000)
+            break;
     }
 }
 
@@ -234,6 +243,22 @@ int main(void)
     //ft_debug_man();
     //ft_debug_pthread();
     //ft_debug();
+    show_alloc_mem();
+    test1();
+    test2();
+    test3();
+    test4();
+    test5();
+    test6();
+    test7();
+    test8();
+    test9();
+    test10();
+    test11();
+    test12();
+    test13();
+    test14();
+    ft_free_all();
     show_alloc_mem();
     return (0);
 }
