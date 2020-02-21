@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 10:45:02 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:33:58 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,6 @@ void ft_debug_rea1()
     t = (char*)malloc(sizeof(char) * 1);
     //show_alloc_mem();
     t = (char*)realloc(t, sizeof(char) * 127001);
-    ft_debug();
-	ft_printf("t = 0x%X\n", (void*)t);
     free(t);
 }
 
@@ -207,7 +205,6 @@ void ft_debug_rea2()
 
     t = (char*)malloc(sizeof(char) * 1);
     t = (char*)realloc(t, sizeof(char) * 1073741824);
-    ft_debug();
     free(t);
 }
 
