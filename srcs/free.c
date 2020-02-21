@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 11:11:08 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:22:53 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		remove_empty_blocks(void)
 	while (b[0])
 	{
 		if (b[0]->free == 1 && b[0]->a < 'a' && (b[0]->size + sizeof(t_block)
-			== TINY_SZ || b[0]->size + sizeof(t_block) >= SMALL_SZ))
+			== TINY_PC || b[0]->size + sizeof(t_block) >= SMALL_PC))
 		{
 			if (b[1] != NULL)
 				b[1]->next = b[0]->next;

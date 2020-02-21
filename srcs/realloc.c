@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 10:59:35 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:32:14 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,12 @@ void	*realloc(void *ptr, size_t size)
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
-		{
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
 				return (return_and_unlockmutex(NULL));
-		}
-		ft_memcpy(addr + sizeof(t_block), ptr, tmp->size);
-		ft_block_split(addr, size);
+		addr += sizeof(t_block);
+		ft_memcpy(addr, ptr, tmp->size);
+		ft_block_split(addr - sizeof(t_block), size);
 	}
 	pthread_mutex_unlock(&g_mut);
-	return ((void*)addr + sizeof(t_block));
+	return ((void*)addr);
 }
