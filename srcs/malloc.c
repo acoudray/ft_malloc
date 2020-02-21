@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:15:28 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/20 16:06:56 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 13:45:27 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	*malloc(size_t size)
 {
 	void *addr;
 
-	pthread_mutex_lock(&g_mut);
 	addr = NULL;
 	if (size == 0)
-		return (return_and_unlockmutex(NULL));
-	else if (!(g_glob))
+		return (NULL);
+	pthread_mutex_lock(&g_mut);
+	if (!(g_glob))
 	{
 		if ((addr = ft_create_block(size, &g_glob)) == MAP_FAILED)
 			return (return_and_unlockmutex(NULL));

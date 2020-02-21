@@ -6,7 +6,7 @@
 #    By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/08 14:37:39 by gmachena          #+#    #+#              #
-#    Updated: 2020/02/20 13:21:47 by acoudray         ###   ########.fr        #
+#    Updated: 2020/02/21 14:23:16 by acoudray         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ SRC_NAME =			 ft_atoi.c \
 					 ft_print.c \
 					 tools_f.c \
 					 tools.c \
+					 tools_malloc.c \
 					 printf_main.c
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_PATH = ./obj/
