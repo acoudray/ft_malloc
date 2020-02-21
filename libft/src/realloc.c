@@ -6,21 +6,21 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 14:09:52 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:15:22 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "ft_malloc.h"
 
-int ft_same_sz(int size, t_block *t)
+int		ft_same_sz(int size, t_block *t)
 {
 	if (t->a == 'T' || t->a == 't')
 	{
 		if (size > TINY_PC)
 			return (0);
 	}
-	else if(t->a == 'S' || t->a == 's')
+	else if (t->a == 'S' || t->a == 's')
 	{
 		if (size > SMALL_PC)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:14:12 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:49:59 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ static	char		*ft_process_line(char **str, int len)
 	return (ret);
 }
 
+static	int			thanksnorme(int x)
+{
+	return (x > 0 ? x : 1);
+}
+
 static	char		*ft_read_fd(int fd, char *tab, int *i)
 {
 	char			*buff;
@@ -81,10 +86,22 @@ static	char		*ft_read_fd(int fd, char *tab, int *i)
 		tab = ft_strncpy(tab, buff, *i);
 		tab[*i] = '\0';
 		free(buff);
-		if ((*i % BUFF_5IZE(BUFF_SIZE)) != 0)
+		if ((*i % thanksnorme(BUFF_SIZE)) != 0)
 			break ;
 	}
 	return (tab);
+}
+
+static	int			thanksnorme2(char *str, int fd, int *i)
+{
+	if (!(str = ft_read_fd(fd, str, &*i)) && *i < 0)
+		return (0);
+}
+
+static	int			thanksnorme3(char *str, int i)
+{
+	if (!str && i < 0)
+		return (0);
 }
 
 static	t_gnl		*ft_struct(t_gnl **beginlist, int fd, int *i)
@@ -93,7 +110,8 @@ static	t_gnl		*ft_struct(t_gnl **beginlist, int fd, int *i)
 	char			*str;
 
 	str = NULL;
-	READCHECK((str = ft_read_fd(fd, str, &*i)), (*i));
+	thanksnorme2(str, fd, i);
+	//READCHECK((str = ft_read_fd(fd, str, &*i)), (*i));
 	ptr = *beginlist;
 	while (ptr)
 	{

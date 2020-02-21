@@ -6,12 +6,12 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 14:15:21 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:29:44 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MALLOC
-# define FT_MALLOC
+#ifndef FT_MALLOC_H
+# define FT_MALLOC_H
 # include <sys/mman.h>
 # include <unistd.h>
 # include <sys/time.h>
@@ -65,53 +65,59 @@
 **	- NEXT POINTE SUR LE MAILLON SUIVANT DANS L'ORDRE DE LA MEMOIRE
 */
 
-typedef struct		s_block
+typedef struct			s_block
 {
-	char			a;
-	size_t			size;
-	int				free;
-	struct s_block	*next;
-}					t_block;
+	char				a;
+	size_t				size;
+	int					free;
+	struct s_block		*next;
+}						t_block;
 
-extern t_block*		g_glob;
-extern pthread_mutex_t g_mut;
+extern t_block*			g_glob;
+extern pthread_mutex_t	g_mut;
 
 /*
-**	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE ET RENVOI LE POINTEUR CORESPONDANT:
-**	- APPELLE MEME_INITIALIZE INITIALISE T_BLOCK SI INEXISTANT EST LINK LE POINTER GLOB
-**	- APPELLE SEARCH_BLOCK QUI TROUVE LE BLOCK ADEQUAT ET RENVOIE UN POINTEUR DESSUS
-**	- APPELLE ALLOC_MEM SI AUCUN BLOCK TROUVE.	
-**	- APPELLE BLOCK_SPLIT QUI COUPE EN DEUX LE BLOCK ET POSE UN NOUVEAU META DATA. IL RENVOIE
-**	UN POINTEUR SUR LE CHAINONS ALLOUE
+**	MALLOC FONCTION ALLOUANT SIZE OCTET EN MEMOIRE
+**	ET RENVOI LE POINTEUR CORESPONDANT
+**	APPELLE MEME_INITIALIZE INITIALISE T_BLOCK
+**	SI INEXISTANT EST LINK LE POINTER GLOB
+**	APPELLE SEARCH_BLOCK QUI TROUVE LE
+**	BLOCK ADEQUAT ET RENVOIE UN POINTEUR DESSUS
+**	APPELLE ALLOC_MEM SI AUCUN BLOCK TROUVE.
+**	APPELLE BLOCK_SPLIT QUI COUPE EN DEUX LE BLOCK ET POSE UN NOUVEAU META DATA.
+**	IL RENVOIE UN POINTEUR SUR LE CHAINONS ALLOUE
 **	- RETOURNE L'ADRESSE DU MAILLON + SIZEOF(T_BLOCK)
 */
 
-void	*malloc(size_t size);
-void	*ft_new_block(size_t size);
-void	*ft_create_block(size_t size, t_block **block);
-void	*ft_block_initialize(t_block **block, int maptype, char c);
-void	*ft_search_block(size_t size);
-void	ft_block_split(void *ptr, size_t size);
+void					*malloc(size_t size);
+void					*ft_new_block(size_t size);
+void					*ft_create_block(size_t size, t_block **block);
+void					*ft_block_initialize(t_block **block,
+							int maptype, char c);
+void					*ft_search_block(size_t size);
+void					ft_block_split(void *ptr, size_t size);
 
 /*
 **	FREE FONCTION LIBERANT L'ESPACE ALLOUE PAR MALLOC:
-**	- APPELLE LA FONCTION SET_FREE MODIFIANT LA META DATA APPARTENANT AU POINTEUR ET SETANT LA MEM
-**	- APPELLE MERGE QUI CHECK SI IL N'Y A PAS DE MEMOIRE FRAGMENTE APRES SET_FREE. RENVOIE UN POINTEUR SUR LE MAILLON MERGE
-**	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
+**	- APPELLE LA FONCTION SET_FREE MODIFIANT LA META DATA
+**	APPARTENANT AU POINTEUR ET SETANT LA MEM
+**	- APPELLE MERGE QUI CHECK SI IL N'Y A PAS DE MEMOIRE
+**	FRAGMENTE APRES SET_FREE. RENVOIE UN POINTEUR SUR LE MAILLON MERGE
+**	- APPELLE DEALLOC_MEM QUI APPLIQUE MUNMAP SI LE BLOCK CORESPOND
+**	A UN DES BLOCKS CITE SI DESSUS OU SUPERIEUR ET RELINK LA LISTE
 */
 
-void	free(void *ptr);
-void	ft_set_free(t_block *ptr);
-void	dealloc_mem(t_block *ptr, t_block *tmp);
+void					free(void *ptr);
+void					ft_set_free(t_block *ptr);
+void					dealloc_mem(t_block *ptr, t_block *tmp);
 
-void	*ft_search_addr(void *ptr);
+void					*ft_search_addr(void *ptr);
 
+void					*realloc(void *ptr, size_t size);
 
-void	*realloc(void *ptr, size_t size);
-
-void	show_alloc_mem(void);
-void	ft_free_all(void);
-void	*return_and_unlockmutex(void *ret);
-void	ft_debug(void);
+void					show_alloc_mem(void);
+void					ft_free_all(void);
+void					*return_and_unlockmutex(void *ret);
+void					ft_debug(void);
 
 #endif
