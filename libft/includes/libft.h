@@ -6,7 +6,7 @@
 /*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:32:51 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:24:25 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:56:26 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ char			*ft_deci_bin(char *bin);
 char			*ft_strrev(char *str);
 
 int				get_next_line(const int fd, char **line);
-
 
 extern			void	*ft_malloc(size_t size);
 extern			void	free(void *ptr);
