@@ -6,28 +6,12 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 17:05:00 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 10:45:02 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "./includes/ft_malloc.h"
 # include <pthread.h>
-
-void    ft_debug(void)
-{
-    t_block *tmp;
-    int i;
-
-    i = 1;
-    tmp = g_glob;
-    while (tmp)
-    {
-        printf("-------- BLOC N°%d --------\n\n", i);
-        printf(" -TYPE = %c\n -TAILLE = %d\n -LIBRE = %d\n\n\n", tmp->a, (int)tmp->size, tmp->free);
-        i++;
-        tmp = tmp->next;
-    }
-}
 
 void *task1(void *test)
 {
@@ -223,6 +207,7 @@ void ft_debug_rea2()
 
     t = (char*)malloc(sizeof(char) * 1);
     t = (char*)realloc(t, sizeof(char) * 1073741824);
+    ft_debug();
     free(t);
 }
 
@@ -248,7 +233,7 @@ int main(void)
     ft_debug_rea2();
     //ft_debug_man();
     //ft_debug_pthread();
-    ft_debug();
-    //show_alloc_mem();
+    //ft_debug();
+    show_alloc_mem();
     return (0);
 }

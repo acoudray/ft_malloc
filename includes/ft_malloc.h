@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:26:15 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 16:18:45 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:28:59 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	*realloc(void *ptr, size_t size);
 void	show_alloc_mem(void);
 void	ft_free_all(void);
 void	*return_and_unlockmutex(void *ret);
+void    ft_debug(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:49:28 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 16:54:30 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 10:59:35 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	*ft_search_addr(void *ptr)
 
 void	*realloc(void *ptr, size_t size)
 {
-	void *addr;
+	void	*addr;
+	t_block	*tmp;
 
 	if (ptr == NULL)
 		return (malloc(size));
@@ -80,15 +81,18 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
+	tmp = ptr - sizeof(t_block);
 	pthread_mutex_lock(&g_mut);
 	if ((addr = ft_search_addr(ptr)) == NULL)
 		return (return_and_unlockmutex(addr));
 	if (ft_resize_block(addr, size) == NULL)
 	{
 		if ((addr = ft_search_block(size)) == NULL)
+		{
 			if ((addr = ft_new_block(size)) == MAP_FAILED)
 				return (return_and_unlockmutex(NULL));
-		ft_memcpy(addr + sizeof(t_block), ptr, size);
+		}
+		ft_memcpy(addr + sizeof(t_block), ptr, tmp->size);
 		ft_block_split(addr, size);
 	}
 	pthread_mutex_unlock(&g_mut);
