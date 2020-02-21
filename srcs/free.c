@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 11:18:37 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 13:22:53 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 14:41:36 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static void		merge(void)
 	}
 }
 
+static t_block	*prod_cross(t_block *one, t_block *two)
+{
+	t_block *three;
+
+	three = one->next;
+	g_glob = two;
+	return (three);
+}
+
 static void		remove_empty_blocks(void)
 {
 	t_block *b[2];
@@ -43,10 +52,7 @@ static void		remove_empty_blocks(void)
 			if (b[1] != NULL)
 				b[1]->next = b[0]->next;
 			else
-			{
-				b[1] = b[0]->next;
-				g_glob = b[1];
-			}
+				b[1] = prod_cross(b[0], b[1]);
 			munmap(b[0], b[0]->size + sizeof(t_block));
 			b[0] = b[1];
 			if (b[0] != NULL)
