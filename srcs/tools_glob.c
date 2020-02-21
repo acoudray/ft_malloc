@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_glob.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:16:12 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 10:44:50 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 12:13:53 by acoudray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*ft_search_block(size_t size)
 	return (NULL);
 }
 
-void	*ft_mem_initialize(t_block **block, int size, char sz)
+void	*ft_mem_initialize(t_block **block, size_t size, char sz)
 {
 	(*block)->a = sz;
 	(*block)->size = size;
@@ -46,9 +46,9 @@ void	*ft_mem_initialize(t_block **block, int size, char sz)
 void	*ft_create_block(size_t size, t_block **block)
 {
 	char	sz;
-	int		maptype;
+	size_t	maptype;
 	t_block	*new;
-	int		largesize;
+	size_t	largesize;
 
 	largesize = (size + sizeof(t_block)) % 4096;
 	if (size <= TINY_PC)
