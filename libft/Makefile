@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+         #
+#    By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/08 14:37:39 by gmachena          #+#    #+#              #
-#    Updated: 2020/02/21 14:23:16 by acoudray         ###   ########.fr        #
+#    Updated: 2020/02/21 16:31:11 by gmachena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,9 @@ SRC_NAME =			 ft_atoi.c \
 					 tools_f.c \
 					 tools.c \
 					 tools_malloc.c \
-					 printf_main.c
+					 printf_main.c \
+					ft_list_par.c	\
+
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_PATH = ./obj/
 OBJ_NAME = $(SRC_NAME:.c=.o)
