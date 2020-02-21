@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:32:51 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 15:56:26 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:35:36 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 100000
-# define BUFF_5IZE(x) (x > 0 ? x : 1)
-# define READCHECK(x, y) if (!x && y < 0) return (0);
-# define ABS(x) x < 0 ? x * - 1.0 : x
-# define UC unsigned char
-# define LD long double
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
@@ -182,9 +177,10 @@ char			*ft_deci_bin(char *bin);
 char			*ft_strrev(char *str);
 
 int				get_next_line(const int fd, char **line);
+t_gnl			*ft_list_par(t_gnl *ptr, int fd);
 
-extern			void	*ft_malloc(size_t size);
-extern			void	free(void *ptr);
-extern			void	*realloc(void *ptr, size_t size);
+extern	void	*ft_malloc(size_t size);
+extern	void	free(void *ptr);
+extern	void	*realloc(void *ptr, size_t size);
 
 #endif

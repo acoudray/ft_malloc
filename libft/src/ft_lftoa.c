@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lftoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:14:36 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/20 13:13:19 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:32:26 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ char			*ft_lftoa(long double nbr)
 
 	if (nbr != nbr)
 		return ((nbr < 0) ? ("-nan") : ("nan"));
-	if (!(longdb_tab = (UC *)malloc(sizeof(UC) * sizeof(LD) + 1)))
-		return (0);
-	if (!(res = (unsigned char *)malloc(sizeof(unsigned char) * 128 + 1)))
+	if (!(longdb_tab = (unsigned char *)malloc(sizeof(unsigned char) *
+	sizeof(long double) + 1)) || !(res =
+	(unsigned char *)malloc(sizeof(unsigned char) * 128 + 1)))
 		return (0);
 	ft_memset(longdb_tab, '\0', sizeof(long double) + 1);
 	ft_memset(res, '\0', sizeof(unsigned char) * 128 + 1);

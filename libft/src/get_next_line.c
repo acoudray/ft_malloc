@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:14:12 by acoudray          #+#    #+#             */
-/*   Updated: 2020/02/21 15:49:59 by acoudray         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:32:10 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ static	char		*ft_process_line(char **str, int len)
 	return (ret);
 }
 
-static	int			thanksnorme(int x)
-{
-	return (x > 0 ? x : 1);
-}
-
 static	char		*ft_read_fd(int fd, char *tab, int *i)
 {
 	char			*buff;
@@ -86,22 +81,10 @@ static	char		*ft_read_fd(int fd, char *tab, int *i)
 		tab = ft_strncpy(tab, buff, *i);
 		tab[*i] = '\0';
 		free(buff);
-		if ((*i % thanksnorme(BUFF_SIZE)) != 0)
+		if ((*i % (BUFF_SIZE > 0 ? BUFF_SIZE : 1)) != 0)
 			break ;
 	}
 	return (tab);
-}
-
-static	int			thanksnorme2(char *str, int fd, int *i)
-{
-	if (!(str = ft_read_fd(fd, str, &*i)) && *i < 0)
-		return (0);
-}
-
-static	int			thanksnorme3(char *str, int i)
-{
-	if (!str && i < 0)
-		return (0);
 }
 
 static	t_gnl		*ft_struct(t_gnl **beginlist, int fd, int *i)
@@ -110,18 +93,13 @@ static	t_gnl		*ft_struct(t_gnl **beginlist, int fd, int *i)
 	char			*str;
 
 	str = NULL;
-	thanksnorme2(str, fd, i);
-	//READCHECK((str = ft_read_fd(fd, str, &*i)), (*i));
+	if (!(str = ft_read_fd(fd, str, &*i)) && (*i) < 0)
+		return (0);
 	ptr = *beginlist;
-	while (ptr)
-	{
-		if ((ptr->fd) == fd)
-			return (ptr);
-		else
-			ptr = ptr->next;
-	}
-	READCHECK((str), -1);
-	ptr = NULL;
+	if ((ptr = ft_list_par(ptr, fd)) != 0)
+		return (ptr);
+	if (!(str))
+		return (0);
 	*i = ft_strlen(str);
 	if (!(ptr = (t_gnl *)malloc(sizeof(t_gnl))) ||
 	(!((ptr->str = (char*)malloc(sizeof(char) * (*i + 1))))))
