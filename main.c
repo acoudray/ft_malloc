@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoudray <acoudray@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 11:48:25 by gmachena          #+#    #+#             */
-/*   Updated: 2020/02/21 13:33:58 by gmachena         ###   ########.fr       */
+/*   Updated: 2020/02/21 14:42:03 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,9 @@ void ft_debug_rea2()
 
     t = (char*)malloc(sizeof(char) * 1);
     t = (char*)realloc(t, sizeof(char) * 1073741824);
+    t = (char*)realloc(t, sizeof(char) * 107);
+    t = (char*)realloc(t, sizeof(char) * 2000);
+    t = (char*)realloc(t, sizeof(char) * 1073741824);
     free(t);
 }
 
@@ -235,27 +238,27 @@ void ft_debug_man()
 
 int main(void)
 {
-    //ft_debug_rea1();
+    ft_debug_rea1();
     ft_debug_rea2();
     //ft_debug_man();
-    //ft_debug_pthread();
+    ft_debug_pthread();
     //ft_debug();
-    show_alloc_mem();
-    test1();
-    test2();
-    test3();
-    test4();
-    test5();
-    test6();
-    test7();
-    test8();
-    test9();
-    test10();
-    test11();
-    test12();
-    test13();
-    test14();
-    ft_free_all();
+    //show_alloc_mem();
+    // test1();
+    // test2();
+    // test3();
+    // test4();
+    // test5();
+    // test6();
+    // test7();
+    // test8();
+    // test9();
+    // test10();
+    // test11();
+    // test12();
+    // test13();
+    // test14();
+    // ft_free_all();
     show_alloc_mem();
     return (0);
 }
